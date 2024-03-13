@@ -22,7 +22,7 @@ const crearUsuario = async (req, res = response) => {
         if (usuario) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Ya un usuario existente con ese correo'
+                msg: 'Ya hay un usuario existente con ese correo'
             })
         }
 
@@ -106,14 +106,13 @@ const loginUsuario = async (req, res = response) => {
 const revalidarToken = async (req, res = response) => {
     const { uid, name } = req;
 
-    console.log(uid);
-    console.log(name);
-
 
     const token = await generarJWT(uid, name);
 
     res.json({
         ok: true,
+        uid,
+        name,
         token
     });
 };
