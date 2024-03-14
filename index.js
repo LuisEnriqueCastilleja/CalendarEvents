@@ -34,8 +34,12 @@ app.use(express.json());
 //Require de lo que tenemos en auth, todo lo que el archivo vaya a exportar
 //Lo va a habilitar en la ruta 'api/auth'
 app.use('/api/auth', require('./routes/auth'));
-
 app.use('/api/events', require('./routes/events'));
+
+//No es a la carpeta publica ni ninguna otra
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 
 //Escuchar peticiones
